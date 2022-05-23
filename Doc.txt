@@ -1,0 +1,25 @@
+설명
+	WPF Music Player 프로젝트 입니다.
+	일부 Spectrum Analyzer 부분은 Jacob Johnston 코드를 참조 하였음을 알립니다.
+	(Note that the Spectrum Analyzer part refers to Jacob Johnston code.)
+	
+	이 프로젝트는 WPF MVVM 아키텍처 및 기본 C#문법 WPF학습 목적으로 만들어졌습니다.
+
+개발 환경 정보
+	- IDE : VS 2022
+	- Language : C# (WPF)
+	- Framework : .Net6 / Windows Only
+
+사용 라이브러리
+	* 로그 관련
+		- LogHelper / 자체 제작
+	* MVVM 관련
+		- Microsoft.Toolkit.Mvvm / ver : 7.1.2
+		- Microsoft.Xaml.Behaviors
+	* DependencyInjection 관련
+		- Microsoft.Extensions.DependencyInjection / ver : 6.0.0
+
+구현 기능
+	- 앨범 이미지 추출
+	- 기본 음악 재생
+	- 재생 리스트 관리
