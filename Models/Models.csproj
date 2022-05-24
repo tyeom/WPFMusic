@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="taglib-sharp">
+      <HintPath>..\Lib\taglib-sharp\taglib-sharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

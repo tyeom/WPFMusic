@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Views.Windows;
 
 namespace Services;
@@ -14,51 +15,58 @@ public interface IDialogService
 
     void SetSize(double width, double height);
 
-    void SetVM(ViewModelBase vm, string? title, bool duplicateShow = false);
+    bool CheckActivate(string title);
+
+    void SetVM(ViewModelBase vm, string? title);
 }
 
 public class DialogService : IDialogService
 {
-    private readonly IDialog _popWindow;
+    private IDialog? _popWindow;
 
     public DialogService(IDialog popWindow)
     {
         _popWindow = popWindow;
+
+        _popWindow.CloseCallback = () =>
+        {
+            if (_popWindow.DataContext is PopupViewModel vm)
+            {
+                vm.Cleanup();
+                _popWindow.DataContext = null;
+            }
+        };
     }
 
-    public IDialog Dialog => _popWindow;
+    public IDialog? Dialog => _popWindow;
 
     public void SetSize(double width, double height)
     {
-        _popWindow.Width = width;
-        _popWindow.Height = height;
+        _popWindow!.Width = width;
+        _popWindow!.Height = height;
     }
 
-    public void SetVM(ViewModelBase vm, string? title, bool duplicateShow = false)
+    public bool CheckActivate(string title)
     {
-        if (duplicateShow is false)
+        var popupWin = Application.Current.Windows.Cast<Window>().FirstOrDefault(p => p.Title == title);
+        if (popupWin is not null)
         {
-            // 이미 표시된 팝업창이 있는 경우 활성화하고 return
-            foreach (var popupWin in System.Windows.Application.Current.Windows)
-            {
-                if (_popWindow.DataContext is PopupViewModel viewModel)
-                {
-                    if (viewModel.PopupVM is not null &&
-                        viewModel.PopupVM.GetType().FullName == vm.GetType().FullName)
-                    {
-                        _popWindow.Activate();
-                        return;
-                    }
-                }
-            }
+            _popWindow = null;
+            popupWin.Activate();
+            return true;
         }
-
+        else
         {
-            if (_popWindow.DataContext is PopupViewModel viewModel)
-            {
-                _popWindow.Title = title;
-                viewModel.PopupVM = vm;
-            }
+            return false;
+        }
+    }
+
+    public void SetVM(ViewModelBase vm, string? title)
+    {
+        if (_popWindow.DataContext is PopupViewModel viewModel)
+        {
+            _popWindow.Title = title;
+            viewModel.PopupVM = vm;
         }
     }
 }

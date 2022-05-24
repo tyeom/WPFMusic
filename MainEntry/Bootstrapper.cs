@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Services;
 using System;
 using ViewModels;
+using ViewModels.MainSettingViewModels;
 using Views.Windows;
 
 namespace MainEntry;
@@ -26,10 +27,20 @@ public class Bootstrapper
         services.AddTransient<IDialog, PopupWindow>();
         
         services.AddSingleton<ISettingService, SettingService>();
+        services.AddSingleton<IBassService, BassService>();
 
 
         // Viewmodels
+        services.AddTransient<ShellViewModel>();
         services.AddTransient<MainViewModel>();
+
+        // 환경설정 - 일반
+        services.AddTransient<GeneralViewModel>();
+        // 환경설정 - 재생
+        services.AddTransient<PlayViewModel>();
+
+        services.AddTransient<AlbumArtInfoViewModel>();
+        services.AddTransient<ControlPanelViewModel>();
 
         return services.BuildServiceProvider();
     }

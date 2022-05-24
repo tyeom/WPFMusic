@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Views.UI.ControlPanelUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Views.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="sButton_Open" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Background="#02000000"
+                              Width="Auto"
+                              Height="Auto"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                            <Path x:Name="xIconPath"
+                                  Stretch="Fill"
+                                  Width="20"
+                                  Height="20"
+                                  StrokeEndLineCap="Square"
+                                  StrokeStartLineCap="Square"
+                                  StrokeThickness="1"
+                                  Data="M6.1,10L4,18V8H21A2,2 0 0,0 19,6H12L10,4H4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H19C19.9,20 20.7,19.4 20.9,18.5L23.2,10H6.1M19,18H6L7.6,12H20.6L19,18Z"
+                                  VerticalAlignment="Stretch"
+                                  SnapsToDevicePixels="True"
+                                  Stroke="#FFB1BAC2" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="xIconPath"
+                                        Property="Stroke"
+                                        Value="#FF929EA9"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="xOpenBtn"
+                    Width="20"
+                    Height="20"
+                    Click="xOpenBtn_Click"
+                    Command="{Binding FileOpenCommand}"
+                    CommandParameter="{Binding ElementName=xOpenBtn, Path=Tag}"
+                    Style="{StaticResource sButton_Open}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -6,7 +6,14 @@
         x:Name="xShellWindow"
         xmlns:local="clr-namespace:MainEntry"
         xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
+        Title="{x:Static local:App.ProductTitle}"
+        Width="{Binding WindowWidth}"
+        Height="{Binding WindowHeight}"
+        Left="{Binding WindowLeft}"
+        Top="{Binding WindowTop}"
+        Topmost="{Binding WindowTopMost}"
         MinWidth="430"
         MinHeight="650">
     <WindowChrome.WindowChrome>
@@ -30,11 +37,11 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid Background="#00000000">
-                            <Border x:Name="icon" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,9,0,0" Background="#FF4E4949" Width="12" Height="1" SnapsToDevicePixels="True"/>
+                            <Border x:Name="icon" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,9,0,0" Background="#FFB1BAC2" Width="12" Height="1" SnapsToDevicePixels="True"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" TargetName="icon" Value="#FF948A8A"/>
+                                <Setter Property="Background" TargetName="icon" Value="#FF929EA9"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Foreground" Value="#ADADAD"/>
@@ -60,10 +67,10 @@
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
                         <Grid Background="#00000000">
                             <Grid x:Name="grid" Margin="0" Visibility="Visible">
-                                <Path x:Name="icon" Data="M18 18V20H4A2 2 0 0 1 2 18V8H4V18M22 6V14A2 2 0 0 1 20 16H8A2 2 0 0 1 6 14V6A2 2 0 0 1 8 4H20A2 2 0 0 1 22 6M20 6H8V14H20Z" Fill="#FF000000" HorizontalAlignment="Stretch" Height="12" Margin="0,1.5,1,0" StrokeStartLineCap="Round" Stretch="Fill" StrokeEndLineCap="Round" Stroke="{x:Null}" StrokeThickness="0" VerticalAlignment="Stretch" Width="13" SnapsToDevicePixels="True"/>
+                                <Path x:Name="icon" Data="M18 18V20H4A2 2 0 0 1 2 18V8H4V18M22 6V14A2 2 0 0 1 20 16H8A2 2 0 0 1 6 14V6A2 2 0 0 1 8 4H20A2 2 0 0 1 22 6M20 6H8V14H20Z" Fill="#FFB1BAC2" HorizontalAlignment="Stretch" Height="12" Margin="0,1.5,1,0" StrokeStartLineCap="Round" Stretch="Fill" StrokeEndLineCap="Round" Stroke="{x:Null}" StrokeThickness="0" VerticalAlignment="Stretch" Width="13" SnapsToDevicePixels="True"/>
                             </Grid>
                             <Grid x:Name="isChecked" Margin="0" Visibility="Collapsed">
-                                <Border x:Name="icon1" BorderBrush="#FF4E4949" BorderThickness="2,3,2,2" Margin="0,2,0,0" Width="12" Height="10" SnapsToDevicePixels="True"/>
+                                <Border x:Name="icon1" BorderBrush="#FFB1BAC2" BorderThickness="1" Margin="0,2,0,0" Width="12" Height="10" SnapsToDevicePixels="True"/>
                             </Grid>
                         </Grid>
                         <ControlTemplate.Triggers>
@@ -72,7 +79,7 @@
                                 <Setter Property="Visibility" TargetName="grid" Value="Collapsed"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Fill" TargetName="icon" Value="#FF948A8A"/>
+                                <Setter Property="Fill" TargetName="icon" Value="#FF929EA9"/>
                             </Trigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
@@ -96,14 +103,32 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid Background="#02000000" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Path Fill="{x:Null}" Stretch="Fill" StrokeEndLineCap="Square" StrokeStartLineCap="Square" StrokeThickness="1.5" Data="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" x:Name="path" Width="10" Height="10" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Stroke="#FF4E4949" />
+                            <Path Fill="{x:Null}" Stretch="Fill" StrokeEndLineCap="Square" StrokeStartLineCap="Square" StrokeThickness="1" Data="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" x:Name="path" Width="10" Height="10" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Stroke="#FFB1BAC2" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Stroke" TargetName="path" Value="#FF948A8A"/>
+                                <Setter Property="Stroke" TargetName="path" Value="#FF929EA9"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Stroke" TargetName="path" Value="#FF948A8A"/>
+                                <Setter Property="Stroke" TargetName="path" Value="#FF667582"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <Style x:Key="sButton_Menu" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Background="#02000000" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Path Fill="#FFB1BAC2" Stretch="Fill" StrokeEndLineCap="Square" StrokeStartLineCap="Square" StrokeThickness="0" Data="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" x:Name="icon" Width="15" Height="15" VerticalAlignment="Stretch" SnapsToDevicePixels="True" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Fill" TargetName="icon" Value="#FF929EA9"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -113,68 +138,131 @@
         </Style>
     </Window.Resources>
 
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="Activated">
+            <behaviors:InvokeCommandAction Command="{Binding ActivatedCommand}" CommandParameter="{Binding ElementName=xShellWindow, Path=Tag}" />
+        </behaviors:EventTrigger>
+        
+        <behaviors:EventTrigger EventName="Closing">
+            <behaviors:InvokeCommandAction Command="{Binding ClosingCommand}">
+                <behaviors:InvokeCommandAction.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiParamConverter}">
+                        <Binding ElementName="xShellWindow" Path="Left" />
+                        <Binding ElementName="xShellWindow" Path="Top" />
+                        <Binding ElementName="xShellWindow" Path="Width" />
+                        <Binding ElementName="xShellWindow" Path="Height" />
+                    </MultiBinding>
+                </behaviors:InvokeCommandAction.CommandParameter>
+            </behaviors:InvokeCommandAction>
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
+
     <Grid x:Name="xMainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--상단 타이틀바-->
         <Grid x:Name="xTitleGrid"
-              Grid.Row="0"
               MouseLeftButtonDown="TitleGrid_MouseLeftButtonDown">
 
             <Border BorderThickness="0"
-                    Background="Red"
+                    Background="#FF455668"
                     CornerRadius="0,0,0,0" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <StackPanel x:Name="xTitleStackPnl"
-                        HorizontalAlignment="Right"
-                        Orientation="Horizontal"
-                        d:LayoutOverrides="Height"
-                        VerticalAlignment="Center"
-                        Margin="0, 0, 10, 0">
-                
-                <Rectangle Width="2"
-                           Height="15"
-                           HorizontalAlignment="Left"
-                           Fill="#FFC5BFBF"
-                           Margin="5, 0, 10, 0"/>
-                <Button x:Name="xMinimizeToggleButton"
+                <Button x:Name="xMenuBtn"
+                        Grid.Column="0"
                         IsTabStop="False"
                         Width="15"
                         Height="15"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Margin="0, 0, 5, 0"
-                        Click="MinimizeToggleButton_Click"
-                        Style="{DynamicResource sButton_Minimize}"/>
-                <ToggleButton x:Name="xMaximizeToggleButton"
-                              IsTabStop="False"
-                              Width="15"
-                              Height="15"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center"
-                              IsChecked="{Binding ElementName=xShellWindow, Path=WindowState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Normal}"
-                              Margin="0,0,5,0"
-                              Click="MaximizeToggleButton_Click"
-                              Style="{DynamicResource sToggleButton_Restore}"/>
-                <Button x:Name="xCloseButton"
-                        IsTabStop="False"
-                        Width="15"
-                        Height="15"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Click="CloseButton_Click"
-                        Margin="0, 0, 5, 0"
-                        Style="{DynamicResource sButton_Close}"/>
-            </StackPanel>
+                        Margin="10, 10, 0, 0"
+                        Style="{DynamicResource sButton_Menu}">
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="Click">
+                            <behaviors:ChangePropertyAction TargetName="xMenuPopup"
+                                                            PropertyName="IsOpen" Value="True"/>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
+                </Button>
+
+                <Popup x:Name="xMenuPopup"
+                       Placement="MousePoint"
+                       PlacementTarget="{Binding ElementName=xMenuBtn}"
+                       StaysOpen="False">
+                    <Menu Width="70"
+                          Height="70"
+                          BorderBrush="#FF000000"
+                          BorderThickness="1">
+                        <Menu.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </Menu.ItemsPanel>
+                        <MenuItem Header="설정"
+                                  Height="22"
+                                  HorizontalAlignment="Stretch"
+                                  Command="{Binding MainSettingCommand}"
+                                  Margin="5, 0, 0, 0"/>
+                        <MenuItem x:Name="xProgramExit" 
+                                  Header="종료"
+                                  Height="22"
+                                  HorizontalAlignment="Stretch"
+                                  Click="CloseButton_Click"
+                                  Margin="5, 0, 0, 0"/>
+                    </Menu>
+                </Popup>
+
+                <StackPanel x:Name="xTitleStackPnl"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="0, 0, 10, 0">
+                    <Button x:Name="xMinimizeToggleButton"
+                            IsTabStop="False"
+                            Width="15"
+                            Height="15"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0, 0, 5, 0"
+                            Click="MinimizeToggleButton_Click"
+                            Style="{DynamicResource sButton_Minimize}"/>
+                    <ToggleButton x:Name="xMaximizeToggleButton"
+                                  IsTabStop="False"
+                                  Width="15"
+                                  Height="15"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  IsChecked="{Binding ElementName=xShellWindow, Path=WindowState, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Normal}"
+                                  Margin="0,0,5,0"
+                                  Click="MaximizeToggleButton_Click"
+                                  Style="{DynamicResource sToggleButton_Restore}"/>
+                    <Button x:Name="xCloseButton"
+                            IsTabStop="False"
+                            Width="15"
+                            Height="15"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Click="CloseButton_Click"
+                            Margin="0, 0, 5, 0"
+                            Style="{DynamicResource sButton_Close}"/>
+                </StackPanel>
+            </Grid>
         </Grid>
         <!--상단 타이틀바 END-->
 
         <Grid Grid.Row="1" MouseMove="Grid_MouseMove">
             <ContentControl x:Name="xMainContent"
-                            Content="{Binding CurrentDataContext}"/>
+                            Content="{Binding CurrentDataContext}"
+                            Margin="0, 0, 0, 0"/>
         </Grid>
     </Grid>
 </Window>

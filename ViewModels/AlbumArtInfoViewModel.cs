@@ -1,8 +1,8 @@
 ﻿using Common.Base;
 using Common.Helper;
-using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
+using Models;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -11,33 +11,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using ViewModels.Messaging;
 
 namespace ViewModels;
 
-public class MainViewModel : ViewModelBase
+public class AlbumArtInfoViewModel : ViewModelBase
 {
-    private readonly ISettingService _settingService;
-    private readonly IBassService _bassService;
+    private PlayInfoModel _playInfoModel;
 
-    public MainViewModel(ISettingService settingService, IBassService bassService)
+    public AlbumArtInfoViewModel()
     {
-        Logger.Log.Write("MainViewModel Constructor");
-
-        _settingService = settingService;
-        _bassService = bassService;
-
-        Logger.Log.Write("MainViewModel Constructor End");
+        WeakReferenceMessenger.Default.Register<SetPlayInfoMessage>(this, this.SetPlayInfo);
     }
 
     #region Properties
-    public ControlPanelViewModel? ControlPanel
+    public PlayInfoModel PlayInfoModel
     {
-        get => Ioc.Default.GetService<ControlPanelViewModel>();
-    }
-
-    public AlbumArtInfoViewModel? AlbumArtInfo
-    {
-        get => Ioc.Default.GetService<AlbumArtInfoViewModel>();
+        get => _playInfoModel;
+        set => SetProperty(ref _playInfoModel, value);
     }
     #endregion  // Properties
 
@@ -50,6 +41,11 @@ public class MainViewModel : ViewModelBase
     #endregion  // Commands Execute Methods
 
     #region Methods
+    private void SetPlayInfo(object recipient, SetPlayInfoMessage setPlayInfoMessage)
+    {
+        PlayInfoModel = setPlayInfoMessage.Value;
+    }
+
     public override void Cleanup()
     {
         WeakReferenceMessenger.Default.UnregisterAll(this);

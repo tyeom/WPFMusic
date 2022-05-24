@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -28,6 +29,14 @@ public partial class WPFMusicShell : Window
     public WPFMusicShell()
     {
         InitializeComponent();
+
+        this.Loaded += this.WPFMusicShell_Loaded;
+    }
+
+    private void WPFMusicShell_Loaded(object sender, RoutedEventArgs e)
+    {
+        WindowInteropHelper interopHelper = new WindowInteropHelper(Application.Current.MainWindow);
+        this.Tag = interopHelper.Handle;
     }
 
     private void TitleGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -43,11 +52,6 @@ public partial class WPFMusicShell : Window
         {
             this.DragMove();
         }
-    }
-
-    private void TitleGrid_MouseMove(object sender, MouseEventArgs e)
-    {
-        
     }
 
     private void MaximizeToggleButton_Click(object sender, RoutedEventArgs e)

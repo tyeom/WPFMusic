@@ -2,6 +2,18 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="UI\AlbumArtInfoUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\ControlPanelUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\MainSettingPages\PlayPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\MainSettingPopup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\MainUI.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -10,6 +22,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="UI\AlbumArtInfoUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\ControlPanelUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\MainSettingPages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\MainSettingPages\GeneralPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\MainSettingPages\PlayPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\MainSettingPopup.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\MainUI.xaml">
       <SubType>Designer</SubType>
     </Page>

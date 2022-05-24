@@ -12,8 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Bass.Net">
+      <HintPath>..\Lib\BassNet\Bass.Net.dll</HintPath>
+    </Reference>
     <Reference Include="LogHelper">
       <HintPath>..\Lib\LogHelper\LogHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="taglib-sharp">
+      <HintPath>..\Lib\taglib-sharp\taglib-sharp.dll</HintPath>
     </Reference>
   </ItemGroup>
 

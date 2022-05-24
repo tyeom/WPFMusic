@@ -15,6 +15,8 @@ public interface ISettingService
 
     public PlaySetting? PlaySetting { get; }
 
+    public WindowSetting? WindowSetting { get; }
+
     public void SaveSetting();
 }
 
@@ -22,6 +24,7 @@ public class SettingService : ISettingService
 {
     private GeneralSetting? _generalSetting;
     private PlaySetting? _playSetting;
+    private WindowSetting? _windowSetting;
 
     public SettingService()
     {
@@ -30,11 +33,13 @@ public class SettingService : ISettingService
             SettingsProvider settingsProvider = SerializeHelper.ReadDataFromXmlFile<SettingsProvider>(PathHelper.GetLocalDirectory("Settings.xml"), true);
             _generalSetting = settingsProvider.generalSetting ?? new GeneralSetting();
             _playSetting = settingsProvider.playSetting ?? new PlaySetting();
+            _windowSetting = settingsProvider.windowSetting ?? new WindowSetting();
         }
         else
         {
             _generalSetting = new GeneralSetting();
             _playSetting = new PlaySetting();
+            _windowSetting = new WindowSetting();
             SaveSetting();
         }
 
@@ -45,6 +50,8 @@ public class SettingService : ISettingService
     public GeneralSetting? GeneralSetting { get => _generalSetting; }
 
     public PlaySetting? PlaySetting { get => _playSetting; }
+
+    public WindowSetting? WindowSetting { get => _windowSetting; }
 
     /// <summary>
     /// 설정 기본값 적용
@@ -64,7 +71,7 @@ public class SettingService : ISettingService
             }
         }
 
-        // 프로필 설정 기본 값 적용
+        // 재생 설정 기본 값 적용
         propertyInfoArr = _playSetting.GetType().GetProperties();
         foreach (PropertyInfo pi in propertyInfoArr)
         {
@@ -74,6 +81,17 @@ public class SettingService : ISettingService
                 pi.SetValue(_playSetting, settingAtt.DefaultValue);
             }
         }
+
+        // Window 설정 기본 값 적용
+        propertyInfoArr = _windowSetting.GetType().GetProperties();
+        foreach (PropertyInfo pi in propertyInfoArr)
+        {
+            if (pi.GetValue(_windowSetting) == null || (pi.GetValue(_windowSetting) is int && ((int)pi.GetValue(_windowSetting)) == 0))
+            {
+                SettingAttribute settingAtt = pi.GetCustomAttribute<SettingAttribute>();
+                pi.SetValue(_windowSetting, settingAtt.DefaultValue);
+            }
+        }
     }
 
     public void SaveSetting()
@@ -81,6 +99,7 @@ public class SettingService : ISettingService
         SettingsProvider settingsProvider = new SettingsProvider();
         settingsProvider.generalSetting = GeneralSetting;
         settingsProvider.playSetting = PlaySetting;
+        settingsProvider.windowSetting = WindowSetting;
 
 
         SerializeHelper.SaveDataToXml<SettingsProvider>(PathHelper.GetLocalDirectory("Settings.xml"), settingsProvider, true);

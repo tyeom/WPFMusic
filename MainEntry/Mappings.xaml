@@ -1,9 +1,41 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:dataContext="clr-namespace:ViewModels;assembly=ViewModels"
-                    xmlns:views="clr-namespace:Views.UI;assembly=Views">
+                    xmlns:dataContextByMainSettings="clr-namespace:ViewModels.MainSettingViewModels;assembly=ViewModels"
+                    xmlns:views="clr-namespace:Views.UI;assembly=Views"
+                    xmlns:mainSettings="clr-namespace:Views.UI.MainSettingPages;assembly=Views">
     <!--메인 뷰-->
     <DataTemplate DataType="{x:Type dataContext:MainViewModel}">
         <views:MainUI />
+    </DataTemplate>
+
+    <!--앨범정보 뷰-->
+    <DataTemplate DataType="{x:Type dataContext:AlbumArtInfoViewModel}">
+        <views:AlbumArtInfoUI />
+    </DataTemplate>
+
+    <!--Control Panel 뷰-->
+    <DataTemplate DataType="{x:Type dataContext:ControlPanelViewModel}">
+        <views:ControlPanelUI />
+    </DataTemplate>
+
+    <!--메인 세팅 뷰-->
+    <DataTemplate DataType="{x:Type dataContext:MainSettingPopupViewModel}">
+        <views:MainSettingPopup />
+    </DataTemplate>
+
+    <!--메인 세팅 > 일반 뷰-->
+    <DataTemplate DataType="{x:Type dataContextByMainSettings:GeneralViewModel}">
+        <mainSettings:GeneralPage />
+    </DataTemplate>
+
+    <!--메인 세팅 > Play 뷰-->
+    <DataTemplate DataType="{x:Type dataContextByMainSettings:PlayViewModel}">
+        <mainSettings:PlayPage />
+    </DataTemplate>
+
+    <!--메인 세팅 > 정보 뷰-->
+    <DataTemplate DataType="{x:Type dataContextByMainSettings:AboutViewModel}">
+        <mainSettings:AboutPage />
     </DataTemplate>
 </ResourceDictionary>

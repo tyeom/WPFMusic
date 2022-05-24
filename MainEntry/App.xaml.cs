@@ -3,7 +3,6 @@ using LogHelper;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using System;
 using System.Windows;
-using System.Windows.Media;
 using ViewModels;
 
 namespace MainEntry;
@@ -57,11 +56,13 @@ public partial class App : Application
             // TODO : 사전 체크 로직
         }
 
-        ShellViewModel shellViewModel = new ShellViewModel();
+        ShellViewModel shellViewModel = Ioc.Default.GetService<ShellViewModel>()!;
         shellViewModel.CurrentDataContext = Ioc.Default.GetService<MainViewModel>();
 
         var shellWindow = new WPFMusicShell();
         shellWindow.DataContext = shellViewModel;
+        shellWindow.Width = shellViewModel.WindowWidth;
+        shellWindow.Height = shellViewModel.WindowHeight;
         shellWindow.ShowDialog();
 
         // ShellViewModel 정리

@@ -8,8 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\cal_select_down.png" />
+    <None Remove="Images\cal_select_hover.png" />
+    <None Remove="Images\cal_select_nor.png" />
     <None Remove="Images\input-arrow-closed%403x.png" />
     <None Remove="Images\input-arrow-open%403x.png" />
+    <None Remove="Images\no_album_cover.png" />
+    <None Remove="Images\titlebar_btn_close_bl.png" />
+    <None Remove="Images\yellow_checkmark.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,8 +27,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\cal_select_down.png" />
+    <Resource Include="Images\cal_select_hover.png" />
+    <Resource Include="Images\cal_select_nor.png" />
     <Resource Include="Images\input-arrow-closed@3x.png" />
     <Resource Include="Images\input-arrow-open@3x.png" />
+    <Resource Include="Images\no_album_cover.png" />
+    <Resource Include="Images\titlebar_btn_close_bl.png" />
+    <Resource Include="Images\yellow_checkmark.png" />
   </ItemGroup>
 
 </Project>
