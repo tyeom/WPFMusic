@@ -201,6 +201,7 @@ public class PlayListViewModel : ViewModelBase
         string? lyrics = await this.GetLyricsAsync(setPlayInfoMessage.Value);
         string lyricsHtmlText = $"<head><link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css\"><style type=\"text/css\"> body {{ font-family: 'NanumSquare', sans-serif; color: white; font-size: 13px;  }} </style></head> <body>{lyrics?? "가사 정보 요청 오류 발생"}</body>";
 
+        // TODO : 추후 테이블 태그만 제거하는 정규식으로 처리
         Lyrics = lyricsHtmlText.Replace("cellspacing=0>", "")
             .Replace("cellpadding=0>", "")
             .Replace("cellspacing=0", "")

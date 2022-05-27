@@ -15,8 +15,8 @@ public class ShellViewModel : ViewModelBase
     private readonly IDialogService _dialogService;
 
     public bool _windowTopMost = false;
-    public double _windowLeft = 100;
-    public double _windowTop = 100;
+    public double _windowLeft = 500;
+    public double _windowTop = 500;
     public double _windowWidth = 310;
     public double _windowHeight = 650;
 
@@ -32,8 +32,8 @@ public class ShellViewModel : ViewModelBase
         _bassService = bassService;
 
         WindowTopMost = _settingService.GeneralSetting!.TopMost ?? false;
-        WindowLeft = _settingService.WindowSetting!.XPos ?? 100;
-        WindowTop = _settingService.WindowSetting!.YPos ?? 100;
+        WindowLeft = _settingService.WindowSetting!.XPos ?? 500;
+        WindowTop = _settingService.WindowSetting!.YPos ?? 500;
         WindowWidth = _settingService.WindowSetting!.Width ?? 340;
         WindowHeight = _settingService.WindowSetting!.Height ?? 650;
 
