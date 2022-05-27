@@ -17,6 +17,9 @@
     <Compile Update="UI\MainUI.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\PlayListUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\PopupWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -41,6 +44,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\MainUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\PlayListUI.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\PopupWindow.xaml">

@@ -6,9 +6,8 @@
     <!--Converters Start-->
     <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
     <converters:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" />
-    <converters:Base64ToBitmapImageConverter x:Key="Base64ToBitmapImageConverter"/>
     <!--Converters End-->
-
+    
     <Style TargetType="{x:Type ct:ImageButton}">
         <Setter Property="Template">
             <Setter.Value>
@@ -147,6 +146,140 @@
                            RenderOptions.BitmapScalingMode="HighQuality"
                            HorizontalAlignment="Right"
                            Margin="0, 0, 0, 0" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- SpectrumAnalyzer Control -->
+    <LinearGradientBrush x:Key="SpectrumBarBrush"
+                         EndPoint="0.5,1"
+                         StartPoint="0.5,0">
+        <GradientStop Color="#06799F"
+                      Offset="0" />
+        <GradientStop Color="#024E68"
+                      Offset="1" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="SpectrumPeakBrush"
+                     Color="#61B4CF" />
+
+    <Style TargetType="{x:Type ct:SpectrumAnalyzerControl}">
+        <Setter Property="BarCount"
+                Value="32" />
+        <Setter Property="BarSpacing"
+                Value="5" />
+        <Setter Property="BarStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type Rectangle}">
+                    <Setter Property="Fill"
+                            Value="{StaticResource SpectrumBarBrush}" />
+                    <Setter Property="RadiusX"
+                            Value="3" />
+                    <Setter Property="RadiusY"
+                            Value="3" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="PeakStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type Rectangle}">
+                    <Setter Property="Fill"
+                            Value="{StaticResource SpectrumPeakBrush}" />
+                    <Setter Property="RadiusX"
+                            Value="3" />
+                    <Setter Property="RadiusY"
+                            Value="3" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ct:SpectrumAnalyzerControl}">
+                    <Canvas Name="PART_SpectrumCanvas"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            ClipToBounds="True" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- EndRegion: SpectrumAnalyzer -->
+
+    <Style TargetType="{x:Type ct:PlayListControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ct:PlayListControl}">
+                    <Grid Background="Transparent"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch">
+                        <ItemsPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ct:PlayListItemControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ct:PlayListItemControl}">
+                    <Grid x:Name="xPlayInfoItemGrid"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Center"
+                          Margin="10, 10, 10, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0"
+                                  Width="20"
+                                  Height="20"
+                                  IsChecked="{Binding IsChecked}"
+                                  VerticalAlignment="Center"
+                                  VerticalContentAlignment="Center"
+                                  Cursor="Hand"
+                                  Margin="0, 0, 0, 5"
+                                  Style="{DynamicResource sNormalCheckBox}"/>
+
+                        <Grid x:Name="PART_PlayInfo"
+                              Grid.Column="1"
+                              Background="Transparent"
+                              VerticalAlignment="Center"
+                              Margin="0, 0, 0, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0"
+                                    Width="25"
+                                    Height="25"
+                                    VerticalAlignment="Center"
+                                    Margin="10, 0, 0, 0"
+                                    >
+                                <Path Fill="#FFFFFFFF"
+                                      Visibility="{Binding IsPlaying, Converter={StaticResource BoolToVisConverter}}"
+                                      Data="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+                            </Border>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding TitleText}"
+                                       FontSize="13"
+                                       Foreground="#FFFFFFFF"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="10, 0, 0, 0"
+                                       Style="{DynamicResource xNanumSquareFont}"/>
+                            <TextBlock Grid.Column="2"
+                                       Text="{Binding ArtistText}"
+                                       FontSize="13"
+                                       Foreground="#FFFFFFFF"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="0, 0, 30, 0"
+                                       Style="{DynamicResource xNanumSquareFont}"/>
+                        </Grid>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -19,6 +19,11 @@
         <views:ControlPanelUI />
     </DataTemplate>
 
+    <!--PlayList 뷰-->
+    <DataTemplate DataType="{x:Type dataContext:PlayListViewModel}">
+        <views:PlayListUI />
+    </DataTemplate>
+
     <!--메인 세팅 뷰-->
     <DataTemplate DataType="{x:Type dataContext:MainSettingPopupViewModel}">
         <views:MainSettingPopup />

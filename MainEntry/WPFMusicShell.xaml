@@ -14,7 +14,7 @@
         Left="{Binding WindowLeft}"
         Top="{Binding WindowTop}"
         Topmost="{Binding WindowTopMost}"
-        MinWidth="430"
+        MinWidth="340"
         MinHeight="650">
     <WindowChrome.WindowChrome>
         <WindowChrome ResizeBorderThickness="5"
@@ -168,7 +168,7 @@
               MouseLeftButtonDown="TitleGrid_MouseLeftButtonDown">
 
             <Border BorderThickness="0"
-                    Background="#FF455668"
+                    Background="{DynamicResource MusucAlbumCoverAvgColor}"
                     CornerRadius="0,0,0,0" />
             <Grid>
                 <Grid.ColumnDefinitions>

@@ -18,6 +18,8 @@
 		- Microsoft.Xaml.Behaviors
 	* DependencyInjection 관련
 		- Microsoft.Extensions.DependencyInjection / ver : 6.0.0
+	* Html Render
+		- HtmlRenderer.WPF / ver : 1.5.0.6
 	* 음원 Tag 추출
 		- taglib-sharp
 	* Bass
@@ -27,3 +29,5 @@
 	- 앨범 이미지 추출
 	- 기본 음악 재생
 	- 재생 리스트 관리
+	- 앨범 커버 고유 색상에 따라 배경색 지정
+	- 가사 보기

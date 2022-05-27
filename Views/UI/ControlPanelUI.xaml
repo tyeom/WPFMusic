@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Views.UI"
+             x:Name="xControlPanelUI"
+             xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -11,28 +14,279 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid Background="#02000000"
-                              Width="Auto"
+                        <Grid Width="Auto"
                               Height="Auto"
+                              Background="Transparent"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch">
                             <Path x:Name="xIconPath"
                                   Stretch="Fill"
-                                  Width="20"
-                                  Height="20"
-                                  StrokeEndLineCap="Square"
-                                  StrokeStartLineCap="Square"
-                                  StrokeThickness="1"
+                                  StrokeEndLineCap="Round"
+                                  StrokeStartLineCap="Round"
+                                  StrokeThickness="0"
                                   Data="M6.1,10L4,18V8H21A2,2 0 0,0 19,6H12L10,4H4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H19C19.9,20 20.7,19.4 20.9,18.5L23.2,10H6.1M19,18H6L7.6,12H20.6L19,18Z"
                                   VerticalAlignment="Stretch"
                                   SnapsToDevicePixels="True"
-                                  Stroke="#FFB1BAC2" />
+                                  Fill="#FFFFFFFF"
+                                  Stroke="#FFFFFFFF" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="xIconPath"
-                                        Property="Stroke"
-                                        Value="#FF929EA9"/>
+                                        Property="Fill"
+                                        Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="xIconPath"
+                                        Property="Fill"
+                                        Value="#FF707D8C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <Style x:Key="sButton_PlayMode" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Width="Auto"
+                              Height="Auto"
+                              Background="Transparent"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                            <Path x:Name="xIconPath"
+                                  Stretch="Fill"
+                                  StrokeEndLineCap="Round"
+                                  StrokeStartLineCap="Round"
+                                  StrokeThickness="0"
+                                  VerticalAlignment="Stretch"
+                                  SnapsToDevicePixels="True"
+                                  Data="M13,15V9H12L10,10V11H11.5V15M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"
+                                  Fill="#FFFFFFFF"
+                                  Stroke="#FFFFFFFF" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Tag" Value="Once_All">
+                                <Setter TargetName="xIconPath"
+                                        Property="Data"
+                                        Value="M13,15V9H12L10,10V11H11.5V15M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"/>
+                            </Trigger>
+                            <Trigger Property="Tag" Value="Repeat_All">
+                                <Setter TargetName="xIconPath"
+                                        Property="Data"
+                                        Value="M17,17H7V14L3,18L7,22V19H19V13H17M7,7H17V10L21,6L17,2V5H5V11H7V7Z"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="xIconPath"
+                                        Property="Fill"
+                                        Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="xIconPath"
+                                        Property="Fill"
+                                        Value="#FF707D8C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <Style x:Key="sButton_Shuffle" BasedOn="{x:Null}" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid Width="Auto"
+                              Height="Auto"
+                              Background="Transparent"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                            <Path x:Name="xIconPath"
+                                  Stretch="Fill"
+                                  StrokeEndLineCap="Round"
+                                  StrokeStartLineCap="Round"
+                                  StrokeThickness="0"
+                                  Data="M17,3L22.25,7.5L17,12L22.25,16.5L17,21V18H14.26L11.44,15.18L13.56,13.06L15.5,15H17V12L17,9H15.5L6.5,18H2V15H5.26L14.26,6H17V3M2,6H6.5L9.32,8.82L7.2,10.94L5.26,9H2V6Z"
+                                  VerticalAlignment="Stretch"
+                                  SnapsToDevicePixels="True"
+                                  Fill="#FFFFFFFF"
+                                  Stroke="#FFFFFFFF" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="xIconPath"
+                                        Property="Fill"
+                                        Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="xIconPath"
+                                        Property="Fill"
+                                        Value="#FF707D8C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <Style x:Key="sButton_Backward" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Width="Auto"
+                              Height="Auto"
+                              Background="Transparent"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                            <Path x:Name="xIconPath"
+                                  Stretch="Fill"
+                                  StrokeEndLineCap="Round"
+                                  StrokeStartLineCap="Round"
+                                  StrokeThickness="0"
+                                  Data="M20,5V19L13,12M6,5V19H4V5M13,5V19L6,12"
+                                  VerticalAlignment="Stretch"
+                                  SnapsToDevicePixels="True"
+                                  Fill="#FFFFFFFF"
+                                  Stroke="#FFFFFFFF" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="xIconPath"
+                                        Property="Fill"
+                                        Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="xIconPath"
+                                        Property="Fill"
+                                        Value="#FF707D8C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <Style x:Key="sButton_Forward" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Width="Auto"
+                              Height="Auto"
+                              Background="Transparent"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                            <Path x:Name="xIconPath"
+                                  Stretch="Fill"
+                                  StrokeEndLineCap="Round"
+                                  StrokeStartLineCap="Round"
+                                  StrokeThickness="0"
+                                  Data="M4,5V19L11,12M18,5V19H20V5M11,5V19L18,12"
+                                  VerticalAlignment="Stretch"
+                                  SnapsToDevicePixels="True"
+                                  Fill="#FFFFFFFF"
+                                  Stroke="#FFFFFFFF" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="xIconPath"
+                                        Property="Fill"
+                                        Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="xIconPath"
+                                        Property="Fill"
+                                        Value="#FF707D8C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <Style x:Key="sToggleButton_Pause_Play" BasedOn="{x:Null}" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid>
+                            <Grid x:Name="xPlayGrid"
+                                  Width="30"
+                                  Height="30"
+                                  Background="Transparent"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch">
+                                <Path x:Name="xIconPath1"
+                                      Stretch="Fill"
+                                      StrokeEndLineCap="Round"
+                                      StrokeStartLineCap="Round"
+                                      StrokeThickness="0"
+                                      Data="M8,5.14V19.14L19,12.14L8,5.14Z"
+                                      VerticalAlignment="Stretch"
+                                      SnapsToDevicePixels="True"
+                                      Fill="#FFFFFFFF"
+                                      Stroke="#FFFFFFFF" />
+                            </Grid>
+
+                            <Grid x:Name="xPauseGrid"
+                                  Width="Auto"
+                                  Height="Auto"
+                                  Background="Transparent"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch">
+                                <Path x:Name="xIconPath2"
+                                      Stretch="Fill"
+                                      StrokeEndLineCap="Round"
+                                      StrokeStartLineCap="Round"
+                                      StrokeThickness="0"
+                                      Data="M13,16V8H15V16H13M9,16V8H11V16H9M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"
+                                      VerticalAlignment="Stretch"
+                                      SnapsToDevicePixels="True"
+                                      Fill="#FFFFFFFF"
+                                      Stroke="#FFFFFFFF" />
+                            </Grid>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="xPauseGrid"
+                                        Property="Visibility"
+                                        Value="Visible"/>
+                                <Setter TargetName="xPlayGrid"
+                                        Property="Visibility"
+                                        Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="xPlayGrid"
+                                        Property="Visibility"
+                                        Value="Visible"/>
+                                <Setter TargetName="xPauseGrid"
+                                        Property="Visibility"
+                                        Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="xIconPath1"
+                                        Property="Fill"
+                                        Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="xIconPath2"
+                                        Property="Fill"
+                                        Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="xIconPath1"
+                                        Property="Fill"
+                                        Value="#FF707D8C"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="xIconPath2"
+                                        Property="Fill"
+                                        Value="#FF707D8C"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -41,16 +295,205 @@
             <Setter Property="SnapsToDevicePixels" Value="True"/>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid>
-        <StackPanel Orientation="Horizontal">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding PlayInfoModel.IsPlaying}"
+                                     Value="True">
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding PlayInfoModel.CanPlay}"
+                                     Value="True">
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Row="0"
+                     Height="70"
+                     MaxWidth="550"
+                     HorizontalAlignment="Left"
+                     Stretch="Uniform">
+                <controls:SpectrumAnalyzerControl x:Name="xSpectrumAnalyzer"
+                                                  Grid.Row="0"
+                                                  Height="70"
+                                                  Width="{Binding ElementName=xControlPanelUI, Path=ActualWidth}"
+                                                  MaxWidth="550"
+                                                  RegisterSoundPlayer="{Binding RegisterSoundPlayer, Mode=OneTime}"
+                                                  IsPlaying="{Binding PlayInfoModel.IsPlaying}"
+                                                  AveragePeaks="False"
+                                                  MinimumFrequency="20"
+                                                  MaximumFrequency="20000"
+                                                  PeakFallDelay="10"
+                                                  BarHeightScaling="Decibel"/>
+            </Viewbox>
+
+            <Border Grid.Row="1"
+                    Grid.Column="0">
+                <behaviors:Interaction.Triggers>
+                    <behaviors:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <behaviors:InvokeCommandAction Command="{Binding ReadyCangeChannelPostionCommand}" />
+                    </behaviors:EventTrigger>
+                    <behaviors:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                        <behaviors:InvokeCommandAction Command="{Binding UpdateChannelPostionCommand}"
+                                                           CommandParameter="{Binding ElementName=xChannelSlider, Path=Value}" />
+                    </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+                <Slider x:Name="xChannelSlider"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Maximum="{Binding PlayInfoModel.ChannelLength}"
+                        Value="{Binding PlayInfoModel.ChannelPosition, Mode=OneWay}"
+                        IsMoveToPointEnabled="True"
+                        Style="{StaticResource sRepeatSlider}">
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="ValueChanged">
+                            <behaviors:InvokeCommandAction Command="{Binding ChangingChannelPostionCommand}"
+                                                           CommandParameter="{Binding ElementName=xChannelSlider, Path=Value}" />
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
+                </Slider>
+            </Border>
+
+            <Viewbox Grid.Row="1"
+                     Grid.Column="1"
+                     Width="23"
+                     Height="23"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Center"
+                     Margin="10, 0, 0, 0">
+                <Border VerticalAlignment="Center">
+                    <Path Fill="#FFFFFFFF"
+                          Data="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+                </Border>
+            </Viewbox>
+
+            <Slider x:Name="xVolumeSlider"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Width="70"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Value="{Binding VolumePosition}"
+                    Maximum="1"
+                    IsMoveToPointEnabled="True"
+                    Margin="10, 0, 0, 0"
+                    Style="{StaticResource sSmallRepeatSlider}"/>
+
+            <TextBlock Grid.Row="2"
+                       Grid.Column="0"
+                       FontSize="13"
+                       Foreground="#FFFFFFFF"
+                       Text="{Binding PlayInfoModel.ElapsedTime, StringFormat=mm:ss, ConverterCulture='ko-KR'}">
+                <TextBlock.Style>
+                    <Style BasedOn="{StaticResource xNanumSquareFont}" TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding PlayInfoModel.IsPlaying}"
+                                         Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding PlayInfoModel.CanPlay}"
+                                         Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock Grid.Row="2"
+                       Grid.Column="0"
+                       FontSize="13"
+                       Foreground="#FFFFFFFF"
+                       HorizontalAlignment="Right"
+                       Text="{Binding PlayInfoModel.TotalTime, StringFormat=mm:ss, ConverterCulture='ko-KR'}"
+                       Margin="0, 0, 10, 0">
+                <TextBlock.Style>
+                    <Style BasedOn="{StaticResource xNanumSquareFont}" TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding PlayInfoModel.IsPlaying}"
+                                         Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding PlayInfoModel.CanPlay}"
+                                         Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+        
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Margin="0, 20, 0, 0">
             <Button x:Name="xOpenBtn"
-                    Width="20"
+                    Width="25"
                     Height="20"
                     Click="xOpenBtn_Click"
                     Command="{Binding FileOpenCommand}"
                     CommandParameter="{Binding ElementName=xOpenBtn, Path=Tag}"
+                    Margin="0, 0, 15, 0"
                     Style="{StaticResource sButton_Open}"/>
+
+            <Button Width="25"
+                    Height="20"
+                    Tag="{Binding DefaultPlayMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding PlayModeCommand}"
+                    Margin="0, 0, 15, 0"
+                    Style="{StaticResource sButton_PlayMode}"/>
+
+            <ToggleButton Width="25"
+                          Height="20"
+                          Margin="0, 0, 15, 0"
+                          IsChecked="{Binding Shuffle}"
+                          Style="{StaticResource sButton_Shuffle}"/>
+
+            <Button Width="30"
+                    Height="20"
+                    IsEnabled="{Binding ElementName=xPlayPauseBtn, Path=IsEnabled}"
+                    Command="{Binding BackwardCommand}"
+                    Margin="0, 0, 15, 0"
+                    Style="{StaticResource sButton_Backward}"/>
+
+            <ToggleButton x:Name="xPlayPauseBtn"
+                          Width="45"
+                          Height="50"
+                          Command="{Binding PlayPauseCommand}"
+                          IsChecked="{Binding PlayInfoModel.IsPlaying, Mode=OneWay}"
+                          Margin="0, 0, 15, 0"
+                          Style="{StaticResource sToggleButton_Pause_Play}"/>
+
+            <Button Width="30"
+                    Height="20"
+                    IsEnabled="{Binding ElementName=xPlayPauseBtn, Path=IsEnabled}"
+                    Command="{Binding ForwardCommand}"
+                    Margin="0, 0, 15, 0"
+                    Style="{StaticResource sButton_Forward}"/>
         </StackPanel>
     </Grid>
 </UserControl>

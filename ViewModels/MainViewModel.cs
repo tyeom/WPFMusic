@@ -30,14 +30,19 @@ public class MainViewModel : ViewModelBase
     }
 
     #region Properties
+    public AlbumArtInfoViewModel? AlbumArtInfo
+    {
+        get => Ioc.Default.GetService<AlbumArtInfoViewModel>();
+    }
+
     public ControlPanelViewModel? ControlPanel
     {
         get => Ioc.Default.GetService<ControlPanelViewModel>();
     }
 
-    public AlbumArtInfoViewModel? AlbumArtInfo
+    public PlayListViewModel? PlayList
     {
-        get => Ioc.Default.GetService<AlbumArtInfoViewModel>();
+        get => Ioc.Default.GetService<PlayListViewModel>();
     }
     #endregion  // Properties
 

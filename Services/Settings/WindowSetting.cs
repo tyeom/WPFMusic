@@ -7,7 +7,7 @@ public class WindowSetting
     /// <summary>
     /// 창 표시 X 좌표
     /// </summary>
-    [Setting(null)]
+    [Setting(100)]
     public double? XPos
     {
         get;
@@ -17,7 +17,7 @@ public class WindowSetting
     /// <summary>
     /// 창 표시 Y 좌표
     /// </summary>
-    [Setting(null)]
+    [Setting(100)]
     public double? YPos
     {
         get;
@@ -27,7 +27,7 @@ public class WindowSetting
     /// <summary>
     /// 창 크기 width
     /// </summary>
-    [Setting(null)]
+    [Setting(340d)]
     public double? Width
     {
         get;
@@ -37,7 +37,7 @@ public class WindowSetting
     /// <summary>
     /// 창 크기 height
     /// </summary>
-    [Setting(null)]
+    [Setting(650d)]
     public double? Height
     {
         get;

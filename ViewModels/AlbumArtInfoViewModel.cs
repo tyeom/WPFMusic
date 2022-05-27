@@ -44,6 +44,19 @@ public class AlbumArtInfoViewModel : ViewModelBase
     private void SetPlayInfo(object recipient, SetPlayInfoMessage setPlayInfoMessage)
     {
         PlayInfoModel = setPlayInfoMessage.Value;
+
+        if (PlayInfoModel.AlbumImage is not null)
+        {
+            var averageColor = ImageHelper.GetAverageColor(PlayInfoModel.AlbumImage);
+
+            System.Windows.Application.Current.Resources["MusucAlbumCoverAvgColor"] =
+                (System.Windows.Media.SolidColorBrush)new System.Windows.Media.BrushConverter().ConvertFrom(averageColor.ToString())!;
+        }
+        else
+        {
+            System.Windows.Application.Current.Resources["MusucAlbumCoverAvgColor"] =
+                (System.Windows.Media.SolidColorBrush)new System.Windows.Media.BrushConverter().ConvertFrom("#FF455668")!;
+        }
     }
 
     public override void Cleanup()

@@ -24,4 +24,9 @@ public partial class MainUI : UserControl
     {
         InitializeComponent();
     }
+
+    private void xControlPanel_MouseMove(object sender, MouseEventArgs e)
+    {
+        e.Handled = true;
+    }
 }

@@ -64,7 +64,10 @@ public class SettingService : ISettingService
         PropertyInfo[] propertyInfoArr = _generalSetting.GetType().GetProperties();
         foreach (PropertyInfo pi in propertyInfoArr)
         {
-            if (pi.GetValue(_generalSetting) == null || (pi.GetValue(_generalSetting) is int && ((int)pi.GetValue(_generalSetting)) == 0))
+            if (pi.GetValue(_generalSetting) == null ||
+                (pi.GetValue(_generalSetting) is int && ((int)pi.GetValue(_generalSetting)) == 0) ||
+                (pi.GetValue(_generalSetting) is double && ((double)pi.GetValue(_generalSetting)) == 0) ||
+                (pi.GetValue(_generalSetting) is float && ((float)pi.GetValue(_generalSetting)) == 0))
             {
                 SettingAttribute settingAtt = pi.GetCustomAttribute<SettingAttribute>();
                 pi.SetValue(_generalSetting, settingAtt.DefaultValue);
@@ -75,7 +78,10 @@ public class SettingService : ISettingService
         propertyInfoArr = _playSetting.GetType().GetProperties();
         foreach (PropertyInfo pi in propertyInfoArr)
         {
-            if (pi.GetValue(_playSetting) == null || (pi.GetValue(_playSetting) is int && ((int)pi.GetValue(_playSetting)) == 0))
+            if (pi.GetValue(_playSetting) == null ||
+                (pi.GetValue(_playSetting) is int && ((int)pi.GetValue(_playSetting)) == 0) ||
+                (pi.GetValue(_playSetting) is double && ((double)pi.GetValue(_playSetting)) == 0) ||
+                (pi.GetValue(_playSetting) is float && ((float)pi.GetValue(_playSetting)) == 0))
             {
                 SettingAttribute settingAtt = pi.GetCustomAttribute<SettingAttribute>();
                 pi.SetValue(_playSetting, settingAtt.DefaultValue);
@@ -86,7 +92,10 @@ public class SettingService : ISettingService
         propertyInfoArr = _windowSetting.GetType().GetProperties();
         foreach (PropertyInfo pi in propertyInfoArr)
         {
-            if (pi.GetValue(_windowSetting) == null || (pi.GetValue(_windowSetting) is int && ((int)pi.GetValue(_windowSetting)) == 0))
+            if (pi.GetValue(_windowSetting) == null ||
+                (pi.GetValue(_windowSetting) is int && ((int)pi.GetValue(_windowSetting)) == 0) ||
+                (pi.GetValue(_windowSetting) is double && ((double)pi.GetValue(_windowSetting)) == 0) ||
+                (pi.GetValue(_windowSetting) is float && ((float)pi.GetValue(_windowSetting)) == 0))
             {
                 SettingAttribute settingAtt = pi.GetCustomAttribute<SettingAttribute>();
                 pi.SetValue(_windowSetting, settingAtt.DefaultValue);

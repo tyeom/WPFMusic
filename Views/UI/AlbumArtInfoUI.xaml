@@ -36,7 +36,7 @@
         </controls:AlbumArtworkPanelConstrol>
         <TextBlock Grid.Row="0"
                    Grid.Column="1"
-                   Text="{Binding PlayInfoModel.TitleText}"
+                   Text="{Binding PlayInfoModel.TitleText, FallbackValue='-'}"
                    VerticalAlignment="Center"
                    FontSize="15"
                    Margin="10, 0, 0, 0"
@@ -44,7 +44,7 @@
 
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
-                   Text="{Binding PlayInfoModel.ArtistText}"
+                   Text="{Binding PlayInfoModel.ArtistText, FallbackValue='-'}"
                    VerticalAlignment="Top"
                    FontSize="15"
                    Margin="10, 0, 0, 0"

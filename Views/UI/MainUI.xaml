@@ -6,10 +6,8 @@
              xmlns:local="clr-namespace:Views.UI"
              mc:Ignorable="d" 
              d:DesignHeight="450"
-             d:DesignWidth="800"
-             MinWidth="430"
-             MinHeight="650">
-    <Grid Background="#FF455668">
+             d:DesignWidth="800">
+    <Grid Background="{DynamicResource MusucAlbumCoverAvgColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -20,10 +18,20 @@
                         Grid.Row="0"
                         Content="{Binding AlbumArtInfo, Mode=OneTime}"
                         HorizontalAlignment="Left"
-                        Margin="30, 30, 0, 0"/>
-        
+                        Margin="30, 30, 30, 0"/>
+
         <ContentControl x:Name="xControlPanel"
                         Grid.Row="1"
-                        Content="{Binding ControlPanel, Mode=OneTime}"/>
+                        MouseMove="xControlPanel_MouseMove"
+                        Content="{Binding ControlPanel, Mode=OneTime}"
+                        HorizontalAlignment="Stretch"
+                        Margin="30, 20, 30, 0"/>
+
+        <ContentControl x:Name="xPlayList"
+                        Grid.Row="2"
+                        MouseMove="xControlPanel_MouseMove"
+                        Content="{Binding PlayList, Mode=OneTime}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0, 30, 0, 0"/>
     </Grid>
 </UserControl>

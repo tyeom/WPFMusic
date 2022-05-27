@@ -64,7 +64,7 @@ public partial class App : Application
         shellWindow.Width = shellViewModel.WindowWidth;
         shellWindow.Height = shellViewModel.WindowHeight;
         shellWindow.ShowDialog();
-
+            
         // ShellViewModel 정리
         shellViewModel.Cleanup();
 

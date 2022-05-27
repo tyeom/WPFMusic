@@ -27,12 +27,18 @@ public partial class ControlPanelUI : UserControl
     private void xOpenBtn_Click(object sender, RoutedEventArgs e)
     {
         Microsoft.Win32.OpenFileDialog openDialog = new Microsoft.Win32.OpenFileDialog();
-        openDialog.Filter = "(*.mp3, *.m4a)|*.mp3;*.m4a";
+        openDialog.Multiselect = true;
+        openDialog.Filter = "(*.mp3, *.m4a, *.wav)|*.mp3;*.m4a;*.wav";
 
         if(openDialog.ShowDialog() is true)
         {
             Button btn = (Button)sender;
-            btn.Tag = openDialog.FileName;
+            btn.Tag = openDialog.FileNames;
+        }
+        else
+        {
+            Button btn = (Button)sender;
+            btn.Tag = null;
         }
     }
 }

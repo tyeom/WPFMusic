@@ -13,4 +13,14 @@ public class PlaySetting
         get;
         set;
     }
+
+    /// <summary>
+    /// 볼륨 설정
+    /// </summary>
+    [Setting(0.5f)]
+    public float Volume
+    {
+        get;
+        set;
+    }
 }

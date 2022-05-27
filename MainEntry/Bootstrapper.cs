@@ -41,6 +41,7 @@ public class Bootstrapper
 
         services.AddTransient<AlbumArtInfoViewModel>();
         services.AddTransient<ControlPanelViewModel>();
+        services.AddTransient<PlayListViewModel>();
 
         return services.BuildServiceProvider();
     }
