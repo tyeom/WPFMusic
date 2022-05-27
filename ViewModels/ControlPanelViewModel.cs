@@ -42,6 +42,8 @@ public class ControlPanelViewModel : ViewModelBase
 
         // 볼륨
         VolumePosition = _settingService.PlaySetting!.Volume;
+        // 재생 모드
+        DefaultPlayMode = _settingService.PlaySetting!.DefaultPlayMode.ToString();
 
         // 플레이 리스트 ViewModel에서 재생 요청 메신저
         WeakReferenceMessenger.Default.Register<ControlPanelViewModel, PlayRequestMessage>(this, this.PlayRequest);
