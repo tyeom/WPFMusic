@@ -23,7 +23,7 @@
 	* 음원 Tag 추출
 		- taglib-sharp
 	* Bass
-		- Bass.Net
+		- Bass.Net (only x86)
 
 구현 기능
 	- 앨범 이미지 추출
