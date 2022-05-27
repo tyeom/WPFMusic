@@ -326,6 +326,8 @@ public class ControlPanelViewModel : ViewModelBase
     private void Play()
     {
         _bassService.OpenFile(PlayInfoModel);
+        // 최초 OpenFile 이전에는 볼륨 세팅이 되지 않기 때문에 Play시 볼륨 세팅한다.
+        _bassService.SetVolume(VolumePosition);
         _bassService.Play();
         PlayPauseCommand.NotifyCanExecuteChanged();
 
