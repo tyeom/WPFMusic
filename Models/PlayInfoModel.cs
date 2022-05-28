@@ -44,7 +44,7 @@ public class PlayInfoModel : ObservableObject, IEquatable<PlayInfoModel>
 
     // 컨트롤 패널
     private bool _canPlay;
-    private bool _canPause;
+    private bool _isPause;
     private bool _canStop;
     private bool _isPlaying;
 
@@ -159,10 +159,10 @@ public class PlayInfoModel : ObservableObject, IEquatable<PlayInfoModel>
         set => SetProperty(ref _canPlay, value);
     }
 
-    public bool CanPause
+    public bool IsPause
     {
-        get => _canPause;
-        set => SetProperty(ref _canPause, value);
+        get => _isPause;
+        set => SetProperty(ref _isPause, value);
     }
 
     public bool CanStop

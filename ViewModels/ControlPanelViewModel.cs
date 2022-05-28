@@ -325,13 +325,30 @@ public class ControlPanelViewModel : ViewModelBase
 
     private void Play()
     {
-        _bassService.OpenFile(PlayInfoModel);
         // 최초 OpenFile 이전에는 볼륨 세팅이 되지 않기 때문에 Play시 볼륨 세팅한다.
         _bassService.SetVolume(VolumePosition);
         _bassService.Play();
         PlayPauseCommand.NotifyCanExecuteChanged();
 
         WeakReferenceMessenger.Default.Send(new SetPlayInfoMessage(PlayInfoModel));
+    }
+
+    private void OpenAndPlay()
+    {
+        _bassService.OpenFile(PlayInfoModel);
+
+        // 최초 OpenFile 이전에는 볼륨 세팅이 되지 않기 때문에 Play시 볼륨 세팅한다.
+        _bassService.SetVolume(VolumePosition);
+        _bassService.Play();
+        PlayPauseCommand.NotifyCanExecuteChanged();
+
+        WeakReferenceMessenger.Default.Send(new SetPlayInfoMessage(PlayInfoModel));
+    }
+
+    private void Stop()
+    {
+        _bassService.Stop();
+        PlayPauseCommand.NotifyCanExecuteChanged();
     }
     #endregion  // Commands Execute Methods너의 의미
 
@@ -344,7 +361,7 @@ public class ControlPanelViewModel : ViewModelBase
         {
             if (PlayInfoModel.IsPlaying is false)
             {
-                this.Play();
+                this.OpenAndPlay();
                 requestMessage.Reply(new PlayResponseMessage("ok", false));
             }
             else
@@ -388,14 +405,14 @@ public class ControlPanelViewModel : ViewModelBase
             {
                 PlayInfoModel = _playInfoList[currentPlayIndex - 1];
                 PlayInfoModel.IsPlayed = false;
-                this.Play();
+                this.OpenAndPlay();
             }
             else
             {
                 // 첫번째 리스트 재생
                 PlayInfoModel = _playInfoList[0];
                 PlayInfoModel.IsPlayed = false;
-                this.Play();
+                this.OpenAndPlay();
             }
         }
         catch (Exception ex)
@@ -417,14 +434,14 @@ public class ControlPanelViewModel : ViewModelBase
                 if (_playInfoList.Count > currentPlayIndex + 1)
                 {
                     PlayInfoModel = _playInfoList[currentPlayIndex + 1];
-                    this.Play();
+                    this.OpenAndPlay();
                     return;
                 }
                 else
                 {
                     // 모두 재생 완료
                     PlayInfoModel = _playInfoList[0];
-                    this.Play();
+                    this.OpenAndPlay();
                 }
                 return;
             }
@@ -443,7 +460,7 @@ public class ControlPanelViewModel : ViewModelBase
                     {
                         var randomPlayInfo = noPlayList.PickRandom();
                         PlayInfoModel = randomPlayInfo;
-                        this.Play();
+                        this.OpenAndPlay();
                     }
                     else
                     {
@@ -455,7 +472,7 @@ public class ControlPanelViewModel : ViewModelBase
                 {
                     var randomPlayInfo = noPlayList.PickRandom();
                     PlayInfoModel = randomPlayInfo;
-                    this.Play();
+                    this.OpenAndPlay();
                 }
             }
             // 일반 재생
@@ -465,7 +482,7 @@ public class ControlPanelViewModel : ViewModelBase
                 if (_playInfoList.Count > currentPlayIndex + 1)
                 {
                     PlayInfoModel = _playInfoList[currentPlayIndex + 1];
-                    this.Play();
+                    this.OpenAndPlay();
                     return;
                 }
                 else
@@ -476,7 +493,7 @@ public class ControlPanelViewModel : ViewModelBase
                 if (DefaultPlayMode == EDefaultPlayMode.Repeat_All.ToString())
                 {
                     PlayInfoModel = _playInfoList[0];
-                    this.Play();
+                    this.OpenAndPlay();
                 }
                 else
                 {

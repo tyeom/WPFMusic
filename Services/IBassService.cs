@@ -156,10 +156,14 @@ public class BassService : IBassService
     public void Pause()
     {
         Bass.BASS_ChannelPause(_activeStreamHandle);
+        PlayInfo.IsPause = true;
         _canPlay = true;
 
         PlayInfo.CanPlay = CanPlay;
         PlayInfo.IsPlaying = false;
+
+        if (_channelPostionTaskCancelToken is not null)
+            _channelPostionTaskCancelToken.Cancel();
     }
 
     public void Play()
@@ -171,15 +175,14 @@ public class BassService : IBassService
 
             if (PlayInfo is not null)
             {
+                PlayInfo.IsPause = false;
                 PlayInfo.CanPlay = CanPlay;
                 PlayInfo.IsPlaying = true;
+                PlayInfo.CanStop = true;
             }
 
             _channelPostionTaskCancelToken = new CancellationTokenSource();
-            _channelPostionTask = Task.Factory.StartNew(this.ChannelPostion,
-                _channelPostionTaskCancelToken.Token,
-                TaskCreationOptions.LongRunning,
-                TaskScheduler.Default);
+            Task.Run(this.ChannelPostion, _channelPostionTaskCancelToken.Token);
         }
     }
 
@@ -200,8 +203,12 @@ public class BassService : IBassService
         _canPlay = true;
 
         if (PlayInfo is null) return;
+        PlayInfo.IsPause = false;
         PlayInfo.CanPlay = CanPlay;
         PlayInfo.IsPlaying = false;
+        PlayInfo.CanStop = false;
+        if (_channelPostionTaskCancelToken is not null)
+            _channelPostionTaskCancelToken.Cancel();
     }
 
     public bool SetVolume(float volume)
@@ -241,15 +248,22 @@ public class BassService : IBassService
                 PlayInfo.RemainingTime = remainingTime;
 
                 if (PlayInfo.ChannelPosition >= _channelLength)
+                {
+                    if (TrackEnded is not null)
+                        TrackEnded(this, new RoutedEventArgs());
+
                     break;
+                }
             }
 
             System.Threading.Thread.Sleep(100);
         }
 
-        this.Stop();
-        if (TrackEnded is not null)
-            TrackEnded(this, new RoutedEventArgs());
+        // 일시중지 인 경우 Stop() 및 다음곡 재생 처리(TrackEnded 이벤트 발생) 안함.
+        if (PlayInfo is not null && PlayInfo.IsPause is false)
+        {
+            this.Stop();
+        }
     }
 
     private void SetPlayTime()
@@ -267,8 +281,6 @@ public class BassService : IBassService
         {
             BASS_CHANNELINFO info = new BASS_CHANNELINFO();
             Bass.BASS_ChannelGetInfo(_activeStreamHandle, info);
-            
-            PlayInfo!.IsPlaying = false;
         }
         else
         {
