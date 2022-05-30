@@ -60,6 +60,7 @@ ViewModel -> Common, Model, Service 의존 참조<br/>
 Service -> View 의존 참조 (popup window IoC 관리) <br/>
 Model 의존 참조 없음 (단독 모듈)
 
+
 ✅ 구현 기능
 -
 
@@ -71,6 +72,7 @@ Model 의존 참조 없음 (단독 모듈)
 - [x] 앨범 커버 고유 색상에 따라 배경색 지정
 - [x] 가사 보기
 
+
 ☑️ 앞으로 구현 기능
 -
 
@@ -78,6 +80,7 @@ Model 의존 참조 없음 (단독 모듈)
 - [ ] 사이즈에 따른 반응형 화면 처리<br/>(사이즈가 큰 경우, 전체 화면에서는 우측으로 플레이리스트 표시)
 - [ ] 유튜브 뮤직 / 라디오 Stream 재생 기능
 - [ ] 동영상 플레이 관련 기능 추가
+
 
 📷 Screenshots
 -
@@ -97,3 +100,31 @@ Model 의존 참조 없음 (단독 모듈)
 
 #### `가사 보기`
 ![image](https://user-images.githubusercontent.com/13028129/170911399-355bb019-867f-4b2d-bd87-8bd54d4a982d.png)
+
+
+Special thanks
+-
+
+- [🔗 powe0101](https://github.com/powe0101)
+
+
+License
+-
+
+Permission is hereby granted, free of charge, to any person obtaining a 
+copy of this software and associated documentation files (the "Software"), 
+to deal in the Software without restriction, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons to whom the 
+Software is furnished to do so, subject to the following conditions: 
+
+The above copyright notice and this permission notice shall be included in 
+all copies or substantial portions of the Software. 
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL 
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS IN THE SOFTWARE. 
