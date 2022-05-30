@@ -4,9 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Views.UI"
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800">
+    <behaviors:Interaction.Triggers>
+        <!--Program 종료시 Unloaded 이벤트 발생 안함.-->
+        <behaviors:EventTrigger EventName="Unloaded">
+            <behaviors:InvokeCommandAction Command="{Binding UnloadedCommand}" />
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
+    
     <Grid Background="{DynamicResource MusucAlbumCoverAvgColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

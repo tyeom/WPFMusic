@@ -137,6 +137,8 @@ public class ShellViewModel : ViewModelBase
 
     private void ClosingExecute(object? param)
     {
+        _bassService.ChannelPostionTaskEnd();
+
         if(_settingService.GeneralSetting!.SaveWindowPosition is not null &&
             _settingService.GeneralSetting!.SaveWindowPosition is true)
         {

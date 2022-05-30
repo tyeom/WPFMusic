@@ -509,6 +509,7 @@ public class ControlPanelViewModel : ViewModelBase
 
     public override void Cleanup()
     {
+        this.Stop();
         WeakReferenceMessenger.Default.UnregisterAll(this);
     }
     #endregion  // Methods

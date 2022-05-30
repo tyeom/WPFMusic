@@ -40,6 +40,8 @@ public interface IBassService : ISpectrumPlayer
     public float GetVolume();
 
     public bool OpenFile(PlayInfoModel playInfo);
+
+    public void ChannelPostionTaskEnd();
 }
 
 public class BassService : IBassService
@@ -47,6 +49,7 @@ public class BassService : IBassService
     public event RoutedEventHandler TrackEnded;
 
     private const int MaxFFT = (int)(BASSData.BASS_DATA_AVAILABLE | BASSData.BASS_DATA_FFT4096);
+    private readonly SemaphoreSlim _sem;
     private Task _channelPostionTask;
     private CancellationTokenSource _channelPostionTaskCancelToken = null;
     private int _sampleFrequency = 44100;
@@ -58,7 +61,7 @@ public class BassService : IBassService
 
     public BassService()
     {
-        
+        _sem = new SemaphoreSlim(1, 1);
     }
 
     public PlayInfoModel PlayInfo => _playInfo;
@@ -93,6 +96,14 @@ public class BassService : IBassService
         {
             int pluginAAC = Bass.BASS_PluginLoad("bass_aac.dll");
             Logger.Log.Write("BASS Plugin load ok");
+
+            // ChannelPostion Check Thread
+            _channelPostionTaskCancelToken = new CancellationTokenSource();
+            _channelPostionTask = Task.Factory.StartNew(this.ChannelPostion,
+                _channelPostionTaskCancelToken.Token,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default);
+
             return true;
         }
     }
@@ -161,9 +172,6 @@ public class BassService : IBassService
 
         PlayInfo.CanPlay = CanPlay;
         PlayInfo.IsPlaying = false;
-
-        if (_channelPostionTaskCancelToken is not null)
-            _channelPostionTaskCancelToken.Cancel();
     }
 
     public void Play()
@@ -179,10 +187,26 @@ public class BassService : IBassService
                 PlayInfo.CanPlay = CanPlay;
                 PlayInfo.IsPlaying = true;
                 PlayInfo.CanStop = true;
-            }
 
-            _channelPostionTaskCancelToken = new CancellationTokenSource();
-            Task.Run(this.ChannelPostion, _channelPostionTaskCancelToken.Token);
+                if (_sem.CurrentCount < 1)
+                {
+                    System.Threading.Thread.Sleep(500);
+                    _sem.Release(1);
+                }
+            }
+            else
+            {
+                if (_sem.CurrentCount < 1)
+                {
+                    System.Threading.Thread.Sleep(500);
+                    _sem.Release(1);
+                    System.Threading.Thread.Sleep(500);
+                    this.ChannelPostionTaskEnd();
+                }
+
+                Logger.Log.Write("PlayInfo is null!");
+                MessageBox.Show("PlayInfo is null!");
+            }
         }
     }
 
@@ -207,8 +231,8 @@ public class BassService : IBassService
         PlayInfo.CanPlay = CanPlay;
         PlayInfo.IsPlaying = false;
         PlayInfo.CanStop = false;
-        if (_channelPostionTaskCancelToken is not null)
-            _channelPostionTaskCancelToken.Cancel();
+
+        System.Threading.Thread.Sleep(500);
     }
 
     public bool SetVolume(float volume)
@@ -225,8 +249,11 @@ public class BassService : IBassService
     {
         while (true)
         {
-            if (PlayInfo is null)
-                break;
+            if (IsPlaying is false)
+            {
+                _sem.Wait();
+                continue;
+            }
 
             if (_channelPostionTaskCancelToken.IsCancellationRequested)
                 break;
@@ -249,20 +276,14 @@ public class BassService : IBassService
 
                 if (PlayInfo.ChannelPosition >= _channelLength)
                 {
+                    this.Stop();
+                    // 다음 재생곡 이벤트 발생
                     if (TrackEnded is not null)
                         TrackEnded(this, new RoutedEventArgs());
-
-                    break;
                 }
             }
 
             System.Threading.Thread.Sleep(100);
-        }
-
-        // 일시중지 인 경우 Stop() 및 다음곡 재생 처리(TrackEnded 이벤트 발생) 안함.
-        if (PlayInfo is not null && PlayInfo.IsPause is false)
-        {
-            this.Stop();
         }
     }
 
@@ -288,5 +309,19 @@ public class BassService : IBassService
             Debug.WriteLine("Error={0}", Bass.BASS_ErrorGetCode());
 #endif
         }
+    }
+
+    public void ChannelPostionTaskEnd()
+    {
+        if (_sem.CurrentCount < 1)
+        {
+            _sem.Release(1);
+            System.Threading.Thread.Sleep(500);
+        }
+
+        if (_channelPostionTaskCancelToken is not null)
+            _channelPostionTaskCancelToken.Cancel();
+
+        Logger.Log.Write("ChannelPostionTaskEnd");
     }
 }

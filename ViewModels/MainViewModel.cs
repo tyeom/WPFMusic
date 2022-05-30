@@ -47,11 +47,27 @@ public class MainViewModel : ViewModelBase
     #endregion  // Properties
 
     #region Commands
-    //
+    private RelayCommand _unloadedCommand;
+    public RelayCommand UnloadedCommand
+    {
+        get
+        {
+            return _unloadedCommand ??
+                (_unloadedCommand = new RelayCommand(this.UnloadedExecute));
+        }
+    }
     #endregion  // Commands
 
     #region Commands Execute Methods
-    //
+    // NOTE : Program 종료시 이벤트 발생 안함.
+    private void UnloadedExecute()
+    {
+        AlbumArtInfo?.Cleanup();
+        ControlPanel?.Cleanup();
+        PlayList?.Cleanup();
+
+        this.Cleanup();
+    }
     #endregion  // Commands Execute Methods
 
     #region Methods
