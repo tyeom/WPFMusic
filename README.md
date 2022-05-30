@@ -87,8 +87,8 @@ Model 의존 참조 없음 (단독 모듈)
 
 
 #### `앨범 커버 이미지 별 색상`
-![image](https://user-images.githubusercontent.com/13028129/170911322-23f02d47-578d-4a0e-b0b5-ee067170e0a9.png)
-![image](https://user-images.githubusercontent.com/13028129/170911334-2f90a9bc-8c18-4433-9676-a7836b8f1ee0.png)
+| ![image](https://user-images.githubusercontent.com/13028129/170911322-23f02d47-578d-4a0e-b0b5-ee067170e0a9.png) | ![image](https://user-images.githubusercontent.com/13028129/170911334-2f90a9bc-8c18-4433-9676-a7836b8f1ee0.png) |
+| --- | --- |
 
 
 #### `재생 화면`
