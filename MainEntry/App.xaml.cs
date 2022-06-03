@@ -1,6 +1,7 @@
 ﻿using Common.Helper;
 using LogHelper;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Services;
 using System;
 using System.Windows;
 using ViewModels;
@@ -55,6 +56,10 @@ public partial class App : Application
         {
             // TODO : 사전 체크 로직
         }
+
+        // 팝업 다이얼로그 호스트 등록
+        var dialogService = Ioc.Default.GetService<IDialogService>();
+        dialogService!.Register(Common.Enums.EDialogHostType.BasicType, typeof(Views.Windows.PopupWindow));
 
         ShellViewModel shellViewModel = Ioc.Default.GetService<ShellViewModel>()!;
         shellViewModel.CurrentDataContext = Ioc.Default.GetService<MainViewModel>();

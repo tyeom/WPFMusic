@@ -21,14 +21,9 @@ public class Bootstrapper
         var services = new ServiceCollection();
 
         // Services
-        // 같은 Popup Window 여러개 띄우는 경우가 있을 수 있기 때문에 서비스 수명주기를 AddTransient 사용
-        services.AddTransient<IDialogService, DialogService>();
-        // 같은 Popup Window 여러개 띄우는 경우가 있을 수 있기 때문에 서비스 수명주기를 AddTransient 사용
-        services.AddTransient<IDialog, PopupWindow>();
-        
+        services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<ISettingService, SettingService>();
         services.AddSingleton<IBassService, BassService>();
-
 
         // Viewmodels
         services.AddTransient<ShellViewModel>();

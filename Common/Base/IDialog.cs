@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Views.Windows;
+namespace Common.Base;
 
 public interface IDialog
 {
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
     public double Width { get; set; }
 
@@ -24,5 +24,5 @@ public interface IDialog
 
     void Close();
 
-    Action CloseCallback { get; set; }
+    Action? CloseCallback { get; set; }
 }

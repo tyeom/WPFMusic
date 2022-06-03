@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ public partial class PopupWindow : Window, IDialog
         InitializeComponent();
     }
 
-    public Action CloseCallback { get; set; }
+    public Action? CloseCallback { get; set; }
 
     private void TitleGrid_MouseMove(object sender, MouseEventArgs e)
     {

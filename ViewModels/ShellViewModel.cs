@@ -26,10 +26,11 @@ public class ShellViewModel : ViewModelBase
 
     private object? _currentDataContext;
 
-    public ShellViewModel(ISettingService settingService, IBassService bassService)
+    public ShellViewModel(ISettingService settingService, IBassService bassService, IDialogService dialogService)
     {
         _settingService = settingService;
         _bassService = bassService;
+        _dialogService = dialogService;
 
         WindowTopMost = _settingService.GeneralSetting!.TopMost ?? false;
         WindowLeft = _settingService.WindowSetting!.XPos ?? 500;
@@ -113,16 +114,13 @@ public class ShellViewModel : ViewModelBase
     #region Commands Execute Methods
     private void MainSettingExecute()
     {
-        var dialogService = Ioc.Default.GetService<IDialogService>();
-        if (dialogService!.CheckActivate("설정") is true)
+        if (_dialogService.CheckActivate("설정") is true)
         {
             // CheckActivate에서 해당 팝업 창 활성화
         }
         else
         {
-            dialogService.SetSize(500, 650);
-            dialogService.SetVM(new MainSettingPopupViewModel(), "설정");
-            dialogService.Dialog.Show();
+            _dialogService.SetVM(new MainSettingPopupViewModel(), "설정", 500, 650, Common.Enums.EDialogHostType.BasicType);
         }
     }
 
@@ -172,6 +170,7 @@ public class ShellViewModel : ViewModelBase
     {
         base.Cleanup();
 
+        _dialogService.Clear();
         CurrentDataContext = null;
     }
     #endregion  // Methods
