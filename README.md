@@ -57,7 +57,7 @@ Model / View / ViewModel 모두 물리적 분리 목표
 
 View -> Common 의존 참조 (외부에서 ViewModel 주입)<br/>
 ViewModel -> Common, Model, Service 의존 참조<br/>
-Service -> View 의존 참조 (popup window IoC 관리) <br/>
+Service -> Common, Model 의존 참조
 Model 의존 참조 없음 (단독 모듈)
 
 
