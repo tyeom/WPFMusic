@@ -151,6 +151,9 @@ public class PlayListViewModel : ViewModelBase
             playInfo.Tag = tag;
             playInfo.SetPlayInfo();
 
+            // 바로 PlayList에서 [추가]한 경우, SetPlayInfoListMessage 메신저 send 호출 전이기에 여기서 초기화 해준다.
+            if (PlayInfoList is null)
+                PlayInfoList = new();
             PlayInfoList.Add(playInfo);
         }
     }
